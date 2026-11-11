@@ -1,0 +1,655 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CELESTE FASHION | Tienda Virtual</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f0faff;
+  color: #183b50;
+}
+
+header {
+  background: #38bdf8;
+  color: white;
+  padding: 18px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 3px 10px #0002;
+}
+
+.logo {
+  font-size: 21px;
+  font-weight: bold;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.hero {
+  background: linear-gradient(120deg,#bae6fd,#e0f2fe);
+  text-align: center;
+  padding: 65px 20px;
+}
+
+.hero h1 {
+  font-size: 35px;
+  color: #075985;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  margin-bottom: 20px;
+}
+
+.btn {
+  background: #0284c7;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #0369a1;
+}
+
+section {
+  padding: 35px 5%;
+}
+
+h2 {
+  text-align: center;
+  color: #0369a1;
+  margin-bottom: 25px;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.categories button {
+  border: none;
+  background: #bae6fd;
+  color: #075985;
+  padding: 11px 17px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.categories button.active,
+.categories button:hover {
+  background: #0284c7;
+  color: white;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px;
+}
+
+.product {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px #0001;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+.product img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.product h3 {
+  margin: 12px 5px 6px;
+}
+
+.product p {
+  font-size: 13px;
+  color: #64748b;
+  padding: 0 8px;
+}
+
+.price {
+  color: #0284c7;
+  font-size: 19px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.product .btn {
+  margin-top: 5px;
+}
+
+.cart {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 750px;
+  margin: auto;
+  box-shadow: 0 3px 12px #0001;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #ddd;
+  padding: 13px 0;
+}
+
+.cart-item button {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.remove {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.qty {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.total {
+  text-align: right;
+  font-size: 23px;
+  color: #0284c7;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+form {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: auto;
+  box-shadow: 0 3px 12px #0001;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bae6fd;
+  border-radius: 7px;
+  margin: 8px 0 15px;
+  outline-color: #38bdf8;
+}
+
+label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+footer {
+  background: #075985;
+  color: white;
+  text-align: center;
+  padding: 25px;
+  margin-top: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media(max-width: 700px) {
+  header {
+    padding: 14px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  nav a {
+    margin: 0;
+    font-size: 12px;
+  }
+
+  .hero h1 {
+    font-size: 27px;
+  }
+
+  .products {
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
+  }
+
+  .product img {
+    height: 145px;
+  }
+
+  section {
+    padding: 28px 12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🛍️ CELESTE FASHION</div>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#catalogo">Productos</a>
+    <a href="#carrito">🛒 Carrito (<span id="cartCount">0</span>)</a>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <h1>¡Viste tu estilo!</h1>
+  <p>Bienvenido a CELESTE FASHION, tu tienda favorita de ropa y calzado.</p>
+  <p>Encuentra moda, calidad y comodidad en un solo lugar.</p>
+  <a href="#catalogo">
+    <button class="btn">Comprar ahora</button>
+  </a>
+</section>
+
+<section id="catalogo">
+  <h2>Nuestro catálogo</h2>
+
+  <div class="categories">
+    <button class="active" onclick="filterProducts('Todos',this)">Todos</button>
+    <button onclick="filterProducts('Damas',this)">Damas</button>
+    <button onclick="filterProducts('Caballeros',this)">Caballeros</button>
+    <button onclick="filterProducts('Zapatillas',this)">Zapatillas</button>
+    <button onclick="filterProducts('Zapatos',this)">Zapatos</button>
+  </div>
+
+  <div class="products" id="products"></div>
+</section>
+
+<section id="carrito">
+  <h2>🛒 Mi carrito de compras</h2>
+
+  <div class="cart">
+    <div id="cartItems"></div>
+    <div class="total">
+      Total: S/ <span id="total">0.00</span>
+    </div>
+    <br>
+    <button class="btn" onclick="goToCheckout()">
+      Realizar pedido
+    </button>
+  </div>
+</section>
+
+<section id="checkout" class="hidden">
+  <h2>Datos del cliente</h2>
+
+  <form id="orderForm">
+    <label>Nombre completo</label>
+    <input type="text" id="name" required placeholder="Ingrese su nombre">
+
+    <label>Teléfono</label>
+    <input type="tel" id="phone" required placeholder="Número de celular">
+
+    <label>Dirección de entrega</label>
+    <input type="text" id="address" required placeholder="Ingrese su dirección">
+
+    <label>Correo electrónico</label>
+    <input type="email" id="email" placeholder="Correo (opcional)">
+
+    <label>Observaciones del pedido</label>
+    <textarea id="notes" rows="3" placeholder="Tallas, colores u otras indicaciones"></textarea>
+
+    <div class="total">
+      Total: S/ <span id="checkoutTotal">0.00</span>
+    </div>
+
+    <br>
+    <button type="submit" class="btn">
+      Confirmar pedido
+    </button>
+  </form>
+</section>
+
+<section id="orders">
+  <h2>Mis pedidos</h2>
+  <div id="orderHistory" class="cart">
+    No hay pedidos registrados.
+  </div>
+</section>
+
+<footer>
+  <h3>CELESTE FASHION</h3>
+  <p>Moda, estilo y elegancia.</p>
+  <p>© 2026 CELESTE FASHION - Todos los derechos reservados.</p>
+</footer>
+
+<script>
+// PRODUCTOS DE LA TIENDA
+const products = [
+  {
+    id:1,
+    name:"Blusa casual",
+    description:"Blusa moderna y elegante para dama.",
+    price:49.90,
+    category:"Damas",
+    image:"https://images.unsplash.com/photo-1551163943-3f6a855d1153?w=500"
+  },
+  {
+    id:2,
+    name:"Vestido moderno",
+    description:"Vestido ideal para ocasiones especiales.",
+    price:79.90,
+    category:"Damas",
+    image:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500"
+  },
+  {
+    id:3,
+    name:"Jean clásico",
+    description:"Pantalón jean cómodo y moderno.",
+    price:69.90,
+    category:"Caballeros",
+    image:"https://images.unsplash.com/photo-1542272604-787c3835535d?w=500"
+  },
+  {
+    id:4,
+    name:"Polo casual",
+    description:"Polo de algodón para uso diario.",
+    price:29.90,
+    category:"Caballeros",
+    image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500"
+  },
+  {
+    id:5,
+    name:"Zapatillas urbanas",
+    description:"Calzado deportivo y cómodo.",
+    price:119.90,
+    category:"Zapatillas",
+    image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+  },
+  {
+    id:6,
+    name:"Zapatillas blancas",
+    description:"Diseño moderno para cualquier ocasión.",
+    price:109.90,
+    category:"Zapatillas",
+    image:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?w=500"
+  },
+  {
+    id:7,
+    name:"Zapatos elegantes",
+    description:"Zapatos formales para dama.",
+    price:99.90,
+    category:"Zapatos",
+    image:"https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
+  },
+  {
+    id:8,
+    name:"Zapatos clásicos",
+    description:"Calzado formal para caballero.",
+    price:129.90,
+    category:"Zapatos",
+    image:"https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=500"
+  }
+];
+
+// RECUPERAR INFORMACIÓN GUARDADA
+let cart = JSON.parse(localStorage.getItem("fashionCart")) || [];
+let orders = JSON.parse(localStorage.getItem("fashionOrders")) || [];
+
+// MOSTRAR PRODUCTOS
+function renderProducts(category="Todos") {
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+
+  const filtered = category === "Todos"
+    ? products
+    : products.filter(p => p.category === category);
+
+  filtered.forEach(p => {
+    container.innerHTML += `
+      <div class="product">
+        <img src="${p.image}" alt="${p.name}"
+          onerror="this.src='https://placehold.co/400x400/e0f2fe/075985?text=Producto'">
+        <h3>${p.name}</h3>
+        <p>${p.description}</p>
+        <div class="price">S/ ${p.price.toFixed(2)}</div>
+        <button class="btn" onclick="addToCart(${p.id})">
+          Agregar al carrito
+        </button>
+      </div>
+    `;
+  });
+}
+
+// FILTRAR CATEGORÍAS
+function filterProducts(category, button) {
+  renderProducts(category);
+
+  document.querySelectorAll(".categories button")
+    .forEach(b => b.classList.remove("active"));
+
+  button.classList.add("active");
+}
+
+// GUARDAR CARRITO
+function saveCart() {
+  localStorage.setItem("fashionCart", JSON.stringify(cart));
+  renderCart();
+}
+
+// AGREGAR PRODUCTO
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  const existing = cart.find(p => p.id === id);
+
+  if (existing) {
+    existing.quantity++;
+  } else {
+    cart.push({...product, quantity:1});
+  }
+
+  saveCart();
+  alert("Producto agregado al carrito.");
+}
+
+// ELIMINAR PRODUCTO
+function removeFromCart(id) {
+  cart = cart.filter(p => p.id !== id);
+  saveCart();
+}
+
+// MODIFICAR CANTIDAD
+function changeQuantity(id, amount) {
+  const item = cart.find(p => p.id === id);
+  if (!item) return;
+
+  item.quantity += amount;
+
+  if (item.quantity <= 0) {
+    removeFromCart(id);
+  } else {
+    saveCart();
+  }
+}
+
+// MOSTRAR CARRITO Y TOTAL
+function renderCart() {
+  const container = document.getElementById("cartItems");
+  container.innerHTML = "";
+
+  let total = 0;
+  let count = 0;
+
+  if (cart.length === 0) {
+    container.innerHTML = "<p>Tu carrito está vacío.</p>";
+  }
+
+  cart.forEach(item => {
+    const subtotal = item.price * item.quantity;
+    total += subtotal;
+    count += item.quantity;
+
+    container.innerHTML += `
+      <div class="cart-item">
+        <div>
+          <strong>${item.name}</strong><br>
+          S/ ${item.price.toFixed(2)} x ${item.quantity}
+          <br>
+          Subtotal: S/ ${subtotal.toFixed(2)}
+          <br><br>
+          <button class="qty"
+            onclick="changeQuantity(${item.id},1)">+</button>
+          <button class="qty"
+            onclick="changeQuantity(${item.id},-1)">-</button>
+        </div>
+        <button class="remove"
+          onclick="removeFromCart(${item.id})">
+          Eliminar
+        </button>
+      </div>
+    `;
+  });
+
+  document.getElementById("total").textContent = total.toFixed(2);
+  document.getElementById("cartCount").textContent = count;
+  document.getElementById("checkoutTotal").textContent = total.toFixed(2);
+}
+
+// IR AL FORMULARIO
+function goToCheckout() {
+  if (cart.length === 0) {
+    alert("Agrega productos antes de realizar tu pedido.");
+    return;
+  }
+
+  document.getElementById("checkout").classList.remove("hidden");
+  document.getElementById("checkout").scrollIntoView({
+    behavior:"smooth"
+  });
+}
+
+// CONFIRMAR PEDIDO
+document.getElementById("orderForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  if (cart.length === 0) {
+    alert("Tu carrito está vacío.");
+    return;
+  }
+
+  const customer = {
+    name:document.getElementById("name").value.trim(),
+    phone:document.getElementById("phone").value.trim(),
+    address:document.getElementById("address").value.trim(),
+    email:document.getElementById("email").value.trim(),
+    notes:document.getElementById("notes").value.trim()
+  };
+
+  const total = cart.reduce(
+    (sum,item) => sum + item.price * item.quantity,0
+  );
+
+  const order = {
+    id:Date.now(),
+    date:new Date().toLocaleString("es-PE"),
+    customer,
+    products:cart.map(item => ({...item})),
+    total
+  };
+
+  orders.push(order);
+
+  localStorage.setItem("fashionOrders",JSON.stringify(orders));
+
+  alert(
+    "¡Pedido registrado correctamente!\n" +
+    "Cliente: " + customer.name +
+    "\nTotal: S/ " + total.toFixed(2)
+  );
+
+  cart = [];
+  saveCart();
+  this.reset();
+
+  document.getElementById("checkout").classList.add("hidden");
+
+  renderOrders();
+
+  document.getElementById("orders").scrollIntoView({
+    behavior:"smooth"
+  });
+});
+
+// HISTORIAL DE PEDIDOS
+function renderOrders() {
+  const container = document.getElementById("orderHistory");
+
+  if (orders.length === 0) {
+    container.textContent = "No hay pedidos registrados.";
+    return;
+  }
+
+  container.innerHTML = "";
+
+  orders.forEach(order => {
+    const div = document.createElement("div");
+    div.style.borderBottom = "1px solid #ddd";
+    div.style.padding = "12px 0";
+
+    const title = document.createElement("strong");
+    title.textContent = "Pedido #" + order.id;
+
+    const details = document.createElement("p");
+    details.textContent =
+      order.date + " | Cliente: " + order.customer.name +
+      " | Total: S/ " + order.total.toFixed(2);
+
+    div.append(title,details);
+    container.appendChild(div);
+  });
+}
+
+// INICIALIZAR APLICACIÓN
+renderProducts();
+renderCart();
+renderOrders();
+
+</script>
+</body>
+</html>
